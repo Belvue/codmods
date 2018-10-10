@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+var str = "https://steamcommunity.com/sharedfiles/filedetails/?id=5043434342";
+    var patt = /(https:(\/\/)steamcommunity.com(\/)sharedfiles(\/)filedetails.*?id=)([0-9]*)/gm;
+    var result = patt.test(str);
+    var str2 = "https://steamcommunity.com/sharedfiles/filedetails/?id=23454abdcsd"
+    result2 = patt.test(str);
+    document.getElementById("demo").innerHTML = result + "<br>" + result2;

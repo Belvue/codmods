@@ -1,0 +1,3 @@
+C:\Users\Mario\source\repos\CodMods\CodMods\obj\Debug\CodMods.njsprojResolveAssemblyReference.cache
+C:\Users\Mario\source\repos\CodMods\CodMods\obj\Debug\CodMods.njsproj.CoreCompileInputs.cache
+C:\Users\Mario\source\repos\CodMods\CodMods\bin\Microsoft.NodejsTools.WebRole.dll

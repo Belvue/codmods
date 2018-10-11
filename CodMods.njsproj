@@ -39,6 +39,9 @@
     <Compile Include="public\javascripts\mod_add.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="public\javascripts\workshop-scraper.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="public\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Compile Include="public\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Compile Include="public\vendor\bootstrap\js\bootstrap.js" />

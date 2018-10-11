@@ -11,7 +11,6 @@ var passport = require('passport');
 var session = require('express-session');
 var SteamStrategy = require('passport-steam').Strategy;
 
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 

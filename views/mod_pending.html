@@ -16,7 +16,7 @@
                         <th scope="col">Approve</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="mod_table">
                     <% for(var i = 0; i < rows.length; i++) { %>
                     <tr>
                         <th scope="row"><%= rows[i].id %></th>
@@ -27,6 +27,7 @@
                         <td><a href="/approve-mod/<%= rows[i].id %>" class="btn-approve">Approve</a> <a href="/dismiss-mod/<%= rows[i].id %>" class="btn-dismiss">Dismiss</a></td>
                     </tr>
                     <% } %>
+                    <% table %>
                 </tbody>
             </table>
         </div>

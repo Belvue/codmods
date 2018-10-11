@@ -2,7 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var connection = require('../public/javascripts/db')
+var connection = require('../public/javascripts/db');
+var workshop = require('../public/javascripts/workshop-scraper');
 
 
 /* GET home page. */
@@ -27,13 +28,16 @@ router.post('/add-mod', function (req, res) {
 
 });
 
-router.get('/pending-mods', function (req, res) {
 
-    connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
-        //if (err) res.send(err)
-        res.render('mod_pending.html', { title: 'Pending mods', req: req, rows: rows });
+router.get('/pending-mods', function (req, res) {
+    workshop.main().then(out => {
+        var table = out;
+
+        connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
+            //if (err) res.send(err)
+            res.render('mod_pending.html', { title: 'Pending mods', req: req, rows: rows, table: table });
+        });
     });
-    
 });
 
 router.get('/approve-mod/:id', function (req, res) {

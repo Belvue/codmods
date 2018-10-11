@@ -1,35 +1,35 @@
-﻿<% include C:\Users\Mario\source\repos\CodMods\CodMods\public\templates\header.html %>
+﻿<% include ..\public\templates\header.html %>
 <br />
 <br />
-    <!-- Page Content -->
-    <section class="py-5">
-        <div class="container">
-            <form action="/add-mod" method="post">
-                <div class="form-group">
-                    <label for="mod_name">Map/Mod name</label>
-                    <input type="text" class="form-control" name="mod_name" placeholder="Enter Map/Mod name">
-                </div>
-                <div class="form-group">
-                    <label for="mod_link">Steam Workshop link</label>
-                    <input type="text" class="form-control" name="mod_link" placeholder="Enter Map/Mod link">
-                </div>
-                <input type="hidden" value="<%= req.user._json.steamid %>" />
-                <div class="form-group">
-                    <select name="type" class="form-control">
-                        <option selected disabled>-- Select --</option>
-                        <option value="0">Map</option>
-                        <option value="1">Mod</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    </section>
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <form action="/add-mod" method="post">
+            <div class="form-group">
+                <label for="mod_name">Map/Mod name</label>
+                <input type="text" class="form-control" name="mod_name" placeholder="Enter Map/Mod name">
+            </div>
+            <div class="form-group">
+                <label for="mod_link">Steam Workshop link</label>
+                <input type="text" class="form-control" name="mod_link" placeholder="Enter Map/Mod link">
+            </div>
+            <input type="hidden" value="<%= req.user._json.steamid %>" />
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option selected disabled>-- Select --</option>
+                    <option value="0">Map</option>
+                    <option value="1">Mod</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="javascripts/mod_add.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="javascripts/mod_add.js"></script>
 
 </body>
 

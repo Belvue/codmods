@@ -8,15 +8,24 @@ var workshop = require('../public/javascripts/workshop-scraper');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index.html', { title: 'Mods & Maps', req: req });
+    res.render('index.html', {
+        title: 'Mods & Maps',
+        req: req
+    });
 });
 
 router.get('/maps', function (req, res) {
-    res.render('maps.html', { title: 'Maps', req: req });
+    res.render('maps.html', {
+        title: 'Maps',
+        req: req
+    });
 });
 
 router.get('/add-mod', function (req, res) {
-    res.render('mod_add.html', { title: 'Add mod', req: req });
+    res.render('mod_add.html', {
+        title: 'Add mod',
+        req: req
+    });
 });
 
 router.post('/add-mod', function (req, res) {
@@ -32,11 +41,15 @@ router.post('/add-mod', function (req, res) {
 router.get('/pending-mods', function (req, res) {
     workshop.main().then(out => {
         var table = out;
-
-        connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
-            //if (err) res.send(err)
-            res.render('mod_pending.html', { title: 'Pending mods', req: req, rows: rows, table: table });
+        // connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
+        //     //if (err) res.send(err)
+        res.render('mod_pending.html', {
+            title: 'Pending mods',
+            req: req,
+            // rows: rows,
+            table: table
         });
+        //});
     });
 });
 
@@ -53,7 +66,9 @@ router.get('/dismiss-mod/:id', function (req, res) {
 });
 
 router.get('/login',
-    passport.authenticate('steam', { failureRedirect: '/' }),
+    passport.authenticate('steam', {
+        failureRedirect: '/'
+    }),
     function (req, res) {
         res.redirect('/');
     });
@@ -63,7 +78,9 @@ router.get('/login/return',
         req.url = req.originalUrl;
         next();
     },
-    passport.authenticate('steam', { failureRedirect: '/' }),
+    passport.authenticate('steam', {
+        failureRedirect: '/'
+    }),
     function (req, res) {
         res.redirect('/');
     });

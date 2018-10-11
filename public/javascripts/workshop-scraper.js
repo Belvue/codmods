@@ -3,7 +3,7 @@ var pageId = 1;
 var maxPageSize = 0;
 
 async function main() {
-    var output = "";
+    var output = [];
     const browser = await puppeteer.launch({
         headless: true
     });
@@ -24,10 +24,13 @@ async function main() {
         var Mod = await elemz.$eval(".workshopItemTitle", ModName => ModName.innerText);
         var Link = await elemz.$eval("a", href => href.href.replace('&searchtext=', ''));
         var Author = await elemz.$eval('.workshopItemAuthorName a', author => author.innerText);
-        output += "<tr><td></td> <td>" + Mod + "</td> <td>" + Author + "</td> <td>" + Link + "</td> <td>0</td></tr>";
+        output.push({
+            Mod: Mod,
+            Author: Author,
+            Link: Link
+        });
     }
     await browser.close();
-    console.log(output);
     return new Promise(resolve => {
         resolve(output);
     });

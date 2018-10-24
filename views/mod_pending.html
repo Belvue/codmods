@@ -1,4 +1,6 @@
 ﻿<% include ..\public\templates\header.html %>
+<link rel="stylesheet" href="../stylesheets/main.css">
+
 <br />
 <br />
 
@@ -17,25 +19,58 @@
                 </tr>
             </thead>
             <tbody id="mod_table">
-                <% for(var i = 0; i < table.length; i++) { %>
+                <% items.forEach( function( item, i ) { %>
                 <tr>
                     <th scope="row">
-                        <%= i %>
+                        <%= i = i+1 %>
                     </th>
                     <td>
-                        <%= table[i].Mod %>
+                        <%= item.Mod %>
                     </td>
                     <td>
-                        <%= table[i].Author %>
+                        <%= item.Author %>
                     </td>
                     <td>
-                        <a href="<%= table[i].Link %>" target="_blank">
-                            <%= table[i].Link %></a>
+                        <a href="<%= item.Link %>" target="_blank">
+                            <%= item.Link %></a>
                     </td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <% } %>
+                <% }) %>
             </tbody>
         </table>
+
+        <% if (pageCount > 1) { %>
+        <nav data-pagination>
+            <ul>
+                <% if (currentPage > 1) { %>
+                <li class="prev"><a href="/pending-mods?page=1">&lsaquo;</a></li>
+                <% } %>
+                <% var i = 1;
+              if (currentPage > 5) {
+              i = +currentPage - 4;
+              } %>
+                <% if (i !== 1) { %>
+                <li class="disabled delimeter"><a href="#">...</a></li>
+                <% } %>
+                <% for (i; i<=pageCount; i++) { %>
+                <% if (currentPage == i) { %>
+                <li class="current"><a>
+                        <%= i %></a></li>
+                <% } else { %>
+                <li><a href="/pending-mods?page=<%= i %>">
+                        <%= i %></a></li>
+                <% } %>
+                <% if (i == (+currentPage + 4)) { %>
+                <li class="disabled delimeter"><a href="javascript:void(0)">...</a></li>
+                <% break; } %>
+                <% } %>
+                <% if (currentPage != pageCount) { %>
+                <li class="next"><a href="/pending-mods?page=<%= pageCount %>">&rsaquo;</a></li>
+                <% } %>
+        </nav>
+        <% } %>
     </div>
 </section>
 

@@ -1,8 +1,9 @@
 ﻿const puppeteer = require('puppeteer');
-var pageId = 1;
+var pageId;
 var maxPageSize = 0;
 
-async function main() {
+async function main(pages) {
+    pageId = pages;
     var output = [];
     const browser = await puppeteer.launch({
         headless: true

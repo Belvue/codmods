@@ -23,10 +23,10 @@ passport.deserializeUser(function (obj, done) {
 });
 
 passport.use(new SteamStrategy({
-    returnURL: 'http://localhost:8080/login/return',
-    realm: 'http://localhost:8080/',
-    apiKey: '7BABB0D2D8C00AE40D6D4201CAB5D14F'
-},
+        returnURL: 'http://localhost:8080/login/return',
+        realm: 'http://localhost:8080/',
+        apiKey: '7BABB0D2D8C00AE40D6D4201CAB5D14F'
+    },
     function (identifier, profile, done) {
         // asynchronous verification, for effect...
         process.nextTick(function () {
@@ -53,7 +53,9 @@ app.engine('html', require('ejs').renderFile);
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 //app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
@@ -105,6 +107,6 @@ app.use(function (err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(8080, function () {
+var server = app.listen(8081, function () {
     debug('Express server listening on port ' + server.address().port);
 });

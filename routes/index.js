@@ -5,7 +5,6 @@ var passport = require('passport');
 var connection = require('../public/javascripts/db');
 var workshop = require('../public/javascripts/workshop-scraper');
 
-
 /* GET home page. */
 router.get('/', function (req, res) {
     res.render('index.html', {
@@ -39,16 +38,46 @@ router.post('/add-mod', function (req, res) {
 
 
 router.get('/pending-mods', function (req, res) {
-    workshop.main().then(out => {
+    var totalEntries,
+        pageSize,
+        pageCount = 2190 / 10,
+        currentPage = 1,
+        items = [],
+        itemsArray = [],
+        itemsList = [];
+    if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    }
+    workshop.main(currentPage).then(out => {
         var table = out;
-        // connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
-        //     //if (err) res.send(err)
+
+        //Pagination
+        totalEntries = 2190;
+        pageSize = table.length;
+        for (var i = 0; i < table.length; i++) {
+            items.push(table[i]);
+        }
+        while (items.length > 0) {
+            itemsArray.push(items.splice(0, pageSize));
+        }
+        itemsList = itemsArray[0];
+
+        //End of Pagination
+
         res.render('mod_pending.html', {
             title: 'Pending mods',
             req: req,
             // rows: rows,
-            table: table
+            table: table,
+            items: itemsList,
+            pageSize: pageSize,
+            totalEntries: totalEntries,
+            pageCount: pageCount,
+            currentPage: currentPage
         });
+        // connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
+        //     //if (err) res.send(err)
+
         //});
     });
 });

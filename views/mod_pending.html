@@ -14,8 +14,8 @@
                     <th scope="col">Map name</th>
                     <th scope="col">Author</th>
                     <th scope="col">Workshop link</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Approve</th>
+                    <!--<th scope="col">Status</th>
+                    <th scope="col">Approve</th>-->
                 </tr>
             </thead>
             <tbody id="mod_table">
@@ -31,6 +31,7 @@
                         <%= item.Author %>
                     </td>
                     <td>
+                        <!-- ReSharper disable once Html.PathError -->
                         <a href="<%= item.Link %>" target="_blank">
                             <%= item.Link %></a>
                     </td>

@@ -5,6 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>CodMods</Name>
     <RootNamespace>CodMods</RootNamespace>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -53,6 +54,7 @@
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Content Include="package.json" />
+    <Content Include="public\stylesheets\404.css" />
     <Content Include="public\stylesheets\bootstrap.min.css" />
     <Content Include="public\stylesheets\half-slider.css" />
     <Content Include="public\stylesheets\main.css" />

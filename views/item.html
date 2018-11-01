@@ -1,0 +1,30 @@
+﻿<% include ..\public\templates\header.html %>
+<link rel="stylesheet" href="../stylesheets/main.css">
+
+<br />
+<br />
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <h2><%= items.Title %></h2>
+        <img src="<%= items.Img %>" alt="Preview Image" />
+        <cite>Created By <%= items.Author %></cite>
+        <p><%= items.Desc %></p>
+        <p><%= items.Info[0] %>, <%= items.Info[1] %><%= items.Info[2] != null ? `, ${items.Info[2]}` : "" %></p>
+        <p><%= items.Rating %></p>
+        <!--We do not need to do this until we add the pagination for it.
+        <ul>
+            <% items.Comments.forEach( function( comment, i ) { %>
+            <li>
+                <span>Left by <%= comment.Author %> <cite><%= comment.Date %></cite></span>
+                <p><%= comment.Text %></p>
+            </li>
+            <% }) %>
+        </ul>-->
+    </div>
+</section>
+
+</body>
+
+</html>

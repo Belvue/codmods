@@ -4,6 +4,7 @@ var router = express.Router();
 var passport = require("passport");
 var connection = require("../public/javascripts/db");
 var workshop = require("../public/javascripts/workshop-scraper");
+var lookup = require("../public/javascripts/single-item");
 
 /* GET home page. */
 router.get("/", function (req, res) {
@@ -77,6 +78,8 @@ router.get("/pending-mods", function (req, res) {
             pageCount: pageCount,
             currentPage: currentPage
         });
+
+        //TODO: Add to DB & swap out steamid to author name. - Mario
     });
 });
 
@@ -110,6 +113,21 @@ router.get("/login/return",
     }),
     function (req, res) {
         res.redirect("/");
-    });
+    }
+);
 
+//TODO: add to single-item.js check for comment pagination, if so do loop. - Liam
+router.get("/item/:id",
+    function(req, res) {
+        const item = req.params.id;
+        lookup.main(item).then(items => {
+            res.render("item.html",
+                {
+                    title: `Item ${req.params.id}`,
+                    req: req,
+                    items: items[0]
+                });
+        });
+    }
+);
 module.exports = router;

@@ -40,6 +40,9 @@
     <Compile Include="public\javascripts\mod_add.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="public\javascripts\single-item.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="public\javascripts\workshop-scraper.js">
       <SubType>Code</SubType>
     </Compile>
@@ -83,6 +86,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\index.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\item.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\login.html">

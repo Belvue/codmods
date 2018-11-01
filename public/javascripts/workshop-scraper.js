@@ -11,25 +11,20 @@ async function main(pages) {
 
     console.log(`Loading Page ${pageId}`);
     const page = await browser.newPage();
-    await page.setViewport({
-        width: 1920,
-        height: 1080
-    });
 
     await page.setRequestInterception(true);
 
     page.on("request", (req) => {
-        if (req.resourceType() === "stylesheet" || req.resourceType() === "font" || req.resourceType() === "image") {
+        if (req.resourceType() === "stylesheet" || req.resourceType() === "font" || req.resourceType() === "image" || req.resourceType() === "script") {
             req.abort();
         } else {
             req.continue();
         }
     });
     page.setUserAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3571.0 Mobile Safari/537.36");
-    await page.goto(`https://steamcommunity.com/workshop/browse/?appid=311210&browsesort=trend&section=readytouseitems&actualsort=trend&p=${
-        pageId}`);
+    await page.goto(`https://steamcommunity.com/workshop/browse/?appid=311210&browsesort=trend&section=readytouseitems&actualsort=trend&p=${pageId}`);
     const elem = "div.workshopItem";
-    await page.waitForSelector(elem, { timeout: 2000 });
+    await page.waitForSelector(elem, { timeout: 4000 });
     if (pageId === 1) {
         try {
             // ReSharper disable once DeclarationHides

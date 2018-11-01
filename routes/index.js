@@ -30,15 +30,7 @@ router.get("/add-mod", function (req, res) {
 router.post("/add-mod", function (req, res) {
     // ReSharper disable PossiblyUnassignedProperty
     connection.query(
-        ' INSERT INTO mods(type, name, author, url, status) VALUES("' +
-        req.body.type +
-        '","' +
-        req.body.mod_name +
-        '", "' +
-        req.user._json.steamid +
-        '","' +
-        req.body.mod_link +
-        '", 0)',
+        ` INSERT INTO mods(type, name, author, url, status) VALUES("${req.body.type}","${req.body.mod_name}", "${req.user._json.steamid}","${req.body.mod_link}", 0)`,
         function(err) {
         if (err) throw err;
         res.send(`The map is: ${req.body.mod_name}`);
@@ -50,18 +42,19 @@ router.post("/add-mod", function (req, res) {
 router.get("/pending-mods", function (req, res) {
     var totalEntries,
         pageSize,
-        //pageCount = 2190 / 30,
         currentPage = 1,
         items = [],
         itemsArray = [],
         itemsList = [];
+
     if (typeof req.query.page !== "undefined") {
         currentPage = +req.query.page;
     }
     workshop.main(currentPage).then(out => {
         var table = out;
-        var pageCount = parseInt(parseInt(table[0].Total) / 30) + 1;
+
         //Pagination
+        var pageCount = parseInt(parseInt(table[0].Total) / 30) + 1;
         totalEntries = table.totalItems;
         pageSize = table.length;
         for (let i = 0; i < table.length; i++) {
@@ -77,7 +70,6 @@ router.get("/pending-mods", function (req, res) {
         res.render("mod_pending.html", {
             title: "Pending mods",
             req: req,
-            // rows: rows,
             table: table,
             items: itemsList,
             pageSize: pageSize,
@@ -85,21 +77,17 @@ router.get("/pending-mods", function (req, res) {
             pageCount: pageCount,
             currentPage: currentPage
         });
-        // connection.query('SELECT * FROM mods WHERE status = 0', function (err, rows, fields) {
-        //     //if (err) res.send(err)
-
-        //});
     });
 });
 
 router.get("/approve-mod/:id", function (req, res) {
-    connection.query("UPDATE mods SET status = 1 WHERE id = " + req.params.id, function () {
+    connection.query(`UPDATE mods SET status = 1 WHERE id = ${req.params.id}`, function () {
         res.redirect("/pending-mods");
     });
 });
 
 router.get("/dismiss-mod/:id", function (req, res) {
-    connection.query("UPDATE mods SET status = 2 WHERE id = " + req.params.id, function () {
+    connection.query(`UPDATE mods SET status = 2 WHERE id = ${req.params.id}`, function () {
         res.redirect("/pending-mods");
     });
 });

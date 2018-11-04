@@ -1,3 +1,6 @@
 C:\Users\Mario\source\repos\CodMods\CodMods\obj\Debug\CodMods.njsprojResolveAssemblyReference.cache
 C:\Users\Mario\source\repos\CodMods\CodMods\obj\Debug\CodMods.njsproj.CoreCompileInputs.cache
 C:\Users\Mario\source\repos\CodMods\CodMods\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\Liam\Documents\GitHub\belvue\obj\Debug\CodMods.njsprojAssemblyReference.cache
+C:\Users\Liam\Documents\GitHub\belvue\obj\Debug\CodMods.njsproj.CoreCompileInputs.cache
+C:\Users\Liam\Documents\GitHub\belvue\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,27 +1,61 @@
 ﻿<% include ..\public\templates\header.html %>
 <link rel="stylesheet" href="../stylesheets/main.css">
-
+<style>
+    body {
+        background: #272838;
+        color: #989FCE;
+    }
+    .desc {
+        background: #5D536B;
+        border-radius: 5px;
+        padding: 20px;
+        line-height: 20px;
+        line-break: auto;
+    }
+    img {
+        vertical-align: unset;
+    }
+    .pull-right {
+        display: inline-block;
+        float: right;
+        position: relative;
+        top: -10px;
+    }
+    .inline {
+        display: inline-block;
+        top: 14px;
+        position: relative;
+    }
+</style>
 <br />
 <br />
-
+<!--<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active" style="background-image: url('<%= items.Img %>')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3><%= items.Title %></h3>
+                    <p>Created By <%= items.Author %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>-->
 <!-- Page Content -->
 <section class="py-5">
     <div class="container">
-        <h2><%= items.Title %></h2>
-        <img src="<%= items.Img %>" alt="Preview Image" />
-        <cite>Created By <%= items.Author %></cite>
-        <p><%= items.Desc %></p>
-        <p><%= items.Info[0] %>, <%= items.Info[1] %><%= items.Info[2] != null ? `, ${items.Info[2]}` : "" %></p>
-        <p><%= items.Rating %></p>
-        <!--We do not need to do this until we add the pagination for it.
-        <ul>
-            <% items.Comments.forEach( function( comment, i ) { %>
-            <li>
-                <span>Left by <%= comment.Author %> <cite><%= comment.Date %></cite></span>
-                <p><%= comment.Text %></p>
-            </li>
-            <% }) %>
-        </ul>-->
+        <div>
+            <img src="<%= items.Img %>" class="img-fluid rounded" alt="Preview Image" />
+        </div>
+        <div>
+            <img class="inline" src="<%= items.RatingImg %>" , alt="Rating"/>
+            <p class="inline"><%= items.Rating %></p>
+            <p>File Size: <%= items.Info[0] %><br/>Posted: <%= items.Info[1] %><br/><%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %></p>
+        </div>
+        <p class="desc"><%= items.Desc %></p>
+
+
+        <p><%= items.Stats[0] + " Unique Visitors" %><br/><%= items.Stats[1] + " Current Subscribers" %><br/><%= items.Stats[2] + " Favourites" %></p>
     </div>
 </section>
 

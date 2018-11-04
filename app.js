@@ -82,7 +82,7 @@ app.use("/users", users);
 app.use(function (req, res, next) {
     var err = new Error("Not Found");
     res.status(404).render(__dirname + "/views/error", { message: err.message, error: err });
-    next(err);
+    //next(err);
 });
 
 // error handlers
@@ -115,3 +115,4 @@ app.set("port", process.env.PORT || 3000);
 var server = app.listen(8081, function () {
     debug("Express server listening on port " + server.address().port);
 });
+

@@ -24,7 +24,7 @@
     "passport": "^0.4.0",
     "passport-openid": "^0.4.0",
     "passport-steam": "^1.0.10",
-    "puppeteer": "^1.9.0",
+    "puppeteer": "^1.10.0",
     "request": "^2.88.0",
     "serve-favicon": "^2.3.0"
   }

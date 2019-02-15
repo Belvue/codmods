@@ -1,10 +1,11 @@
-﻿<% include ..\public\templates\header.html %>
+﻿<% include header.html %>
 <link rel="stylesheet" href="../stylesheets/main.css">
 <style>
     body {
         background: #272838;
         color: #989FCE;
     }
+
     .desc {
         background: #5D536B;
         border-radius: 5px;
@@ -12,15 +13,18 @@
         line-height: 20px;
         line-break: auto;
     }
+
     img {
         vertical-align: unset;
     }
+
     .pull-right {
         display: inline-block;
         float: right;
         position: relative;
         top: -10px;
     }
+
     .inline {
         display: inline-block;
         top: 14px;
@@ -36,14 +40,26 @@
             <img src="<%= items.Img %>" class="img-fluid rounded" alt="Preview Image" />
         </div>
         <div>
-            <img class="inline" src="<%= items.RatingImg %>" , alt="Rating"/>
-            <p class="inline"><%= items.Rating %></p>
-            <p>File Size: <%= items.Info[0] %><br/>Posted: <%= items.Info[1] %><br/><%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %></p>
+            <img class="inline" src="<%= items.RatingImg %>" , alt="Rating" />
+            <p class="inline">
+                <%= items.Rating %>
+            </p>
+            <p>File Size:
+                <%= items.Info[0] %><br />Posted:
+                <%= items.Info[1] %><br />
+                <%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %>
+            </p>
         </div>
-        <p class="desc"><%= items.Desc %></p>
+        <p class="desc">
+            <%= items.Desc %>
+        </p>
 
 
-        <p><%= items.Stats[0] + " Unique Visitors" %><br/><%= items.Stats[1] + " Current Subscribers" %><br/><%= items.Stats[2] + " Favourites" %></p>
+        <p>
+            <%= items.Stats[0] + " Unique Visitors" %><br />
+            <%= items.Stats[1] + " Current Subscribers" %><br />
+            <%= items.Stats[2] + " Favourites" %>
+        </p>
     </div>
 </section>
 

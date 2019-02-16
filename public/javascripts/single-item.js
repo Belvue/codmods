@@ -27,12 +27,12 @@ async function main(pageId) {
     const desc = await page.$eval(".workshopItemDescription", description => description.innerHTML.trim());
     var img;
     try {
-        img = await page.$eval(".workshopItemPreviewImageEnlargeableContainer img#previewImage", image => image.src);
+        img = await page.$$eval(".highlight_strip_item.highlight_strip_screenshot img", e => e.map((a) => a.src));
     } catch (except) {
         img = await page.$eval(".workshopItemPreviewImageMain #previewImageMain", image => image.src);
     }
+    if (typeof img == "object") img = img[0];
     const author = await page.$eval("#ig_bottom > div.breadcrumbs > a:nth-child(3)", user => user.innerText.trim().split('\'')[0]);
-    console.log(author);
     const itemStats = await page.$$eval(".detailsStatRight", e => e.map((a) => a.innerText));
     var rating;
     try {

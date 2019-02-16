@@ -5,13 +5,35 @@ var passport = require("passport");
 var connection = require("../public/javascripts/db");
 var workshop = require("../public/javascripts/workshop-scraper");
 var lookup = require("../public/javascripts/single-item");
+var top3 = require("../public/javascripts/latest");
+var getImage = require("../public/javascripts/getImage");
+var async = require('async');
 
 /* GET home page. */
 router.get("/", function (req, res) {
-    res.render("index.html", {
-        title: "Mods & Maps",
-        req: req
-    });
+    top3.main().then((out) => {
+        var items = [];
+        var count = 0;
+        async.map(out, function (each, next) {
+            var item = each;
+            //better way -- select the data you required to process so that you don't need the flag
+            getImage.main(item.Link).then((data) => {
+                var temp_img = /(imw=[0-9]+&imh=[0-9]+)/.exec(data);
+                item.Img = data.replace(temp_img[0], 'imw=1920&imh=1080').replace('letterbox=true', 'letterbox=false');
+                items.push(item);
+                count++;
+                if (count == 3) {
+                    console.log(items);
+                    res.render("index.html", {
+                        title: "Mods & Maps",
+                        req: req,
+                        item: items
+                    });
+                }
+            })
+        })
+    }).catch((e) => console.log(e));
+
 });
 
 router.get("/maps", function (req, res) {
@@ -29,14 +51,12 @@ router.get("/add-mod", function (req, res) {
 });
 
 router.post("/add-mod", function (req, res) {
-    // ReSharper disable PossiblyUnassignedProperty
     connection.query(
         ` INSERT INTO mods(type, name, author, url, status) VALUES("${req.body.type}","${req.body.mod_name}", "${req.user._json.steamid}","${req.body.mod_link}", 0)`,
-        function(err) {
-        if (err) throw err;
-        res.send(`The map is: ${req.body.mod_name}`);
-    });
-    // ReSharper enable PossiblyUnassignedProperty
+        function (err) {
+            if (err) throw err;
+            res.send(`The map is: ${req.body.mod_name}`);
+        });
 });
 
 
@@ -118,15 +138,14 @@ router.get("/login/return",
 
 //TODO: add to single-item.js check for comment pagination, if so do loop. - Liam
 router.get("/item/:id",
-    function(req, res) {
+    function (req, res) {
         const item = req.params.id;
         lookup.main(item).then(items => {
-            res.render("item.html",
-                {
-                    title: `Item ${req.params.id}`,
-                    req: req,
-                    items: items[0]
-                });
+            res.render("item.html", {
+                title: `Item ${req.params.id}`,
+                req: req,
+                items: items[0]
+            });
         });
     }
 );

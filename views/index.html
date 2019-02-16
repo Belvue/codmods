@@ -8,24 +8,36 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('https://steamuserimages-a.akamaihd.net/ugc/940560276599757297/79E6887E53CD85713B2FD807C486B330C9D18926/?interpolation=lanczos-none&output-format=jpeg&output-quality=95&fit=inside%7C637%3A358&composite-to=*,*%7C637%3A358&background-color=black')">
+            <div class="carousel-item active" style="background-image: url('<%= item[0].Img %>')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Die Rise - Sliquifier Floor</h3>
-                    <p>by Mr Wafflez (rc car btw Kappa its a joke calm)</p>
+                    <h3>
+                        <%= item[0].Mod %>
+                    </h3>
+                    <p>by
+                        <%= item[0].Author %>
+                    </p>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://i.ytimg.com/vi/94vy7nygHZE/maxresdefault.jpg')">
+            <div class="carousel-item" style="background-image: url('<%= item[1].Img %>')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>de_train</h3>
-                    <p>by Liam</p>
+                    <h3>
+                        <%= item[1].Mod %>
+                    </h3>
+                    <p>by
+                        <%= item[1].Author %>
+                    </p>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://img00.deviantart.net/2898/i/2017/293/9/a/m1911_in_black_ops_3___by_karma45-dbr5ezc.jpg')">
+            <div class="carousel-item" style="background-image: url('<%= item[2].Img %>')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>M1911 Weapon port</h3>
-                    <p>by Killer15 (for the memes)</p>
+                    <h3>
+                        <%= item[2].Mod %>
+                    </h3>
+                    <p>by
+                        <%= item[2].Author %>
+                    </p>
                 </div>
             </div>
         </div>
@@ -55,7 +67,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

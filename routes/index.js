@@ -16,14 +16,12 @@ router.get("/", function (req, res) {
         var count = 0;
         async.map(out, function (each, next) {
             var item = each;
-            //better way -- select the data you required to process so that you don't need the flag
             getImage.main(item.Link).then((data) => {
                 var temp_img = /(imw=[0-9]+&imh=[0-9]+)/.exec(data);
                 item.Img = data.replace(temp_img[0], 'imw=1920&imh=1080').replace('letterbox=true', 'letterbox=false');
                 items.push(item);
                 count++;
                 if (count == 3) {
-                    console.log(items);
                     res.render("index.html", {
                         title: "Mods & Maps",
                         req: req,

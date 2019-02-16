@@ -1,5 +1,5 @@
 ﻿const puppeteer = require("puppeteer");
-const request = require("request");
+const axios = require('axios');
 
 async function main(pageId) {
     var output = [];
@@ -23,17 +23,16 @@ async function main(pageId) {
     await page.waitForSelector(elem, {
         timeout: 4000
     });
-
     const title = await page.$eval("div.workshopItemTitle", name => name.innerText.trim());
-
-    const desc = await page.$eval(".workshopItemDescription", description => description.innerText.trim());
+    const desc = await page.$eval(".workshopItemDescription", description => description.innerHTML.trim());
     var img;
     try {
         img = await page.$eval(".workshopItemPreviewImageEnlargeableContainer img#previewImage", image => image.src);
     } catch (except) {
         img = await page.$eval(".workshopItemPreviewImageMain #previewImageMain", image => image.src);
     }
-    const author = await page.$eval(".friendBlockContent", user => user.innerText.trim().split("\n")[0]);
+    const author = await page.$eval("#ig_bottom > div.breadcrumbs > a:nth-child(3)", user => user.innerText.trim().split('\'')[0]);
+    console.log(author);
     const itemStats = await page.$$eval(".detailsStatRight", e => e.map((a) => a.innerText));
     var rating;
     try {
@@ -47,6 +46,12 @@ async function main(pageId) {
     } catch (except) {
         ratingImg = "";
     }
+    var commentID = await page.$eval(".commentthread_area", id => id.id);
+    var commentids = /([0-9]+_[0-9]+)/.exec(commentID);
+    var count = 0;
+    await getTotalComments(`https://steamcommunity.com/comment/PublishedFile_Public/render/${commentids[0].split('_')[0]}/${commentids[0].split('_').pop()}/`).then(out => {
+        count = parseInt(out);
+    }).catch(e => console.error(e));
     const stats = await page.$$eval(".stats_table tr td:nth-child(odd)", e => e.map((a) => a.innerText));
     console.log(stats);
     output.push({
@@ -57,7 +62,8 @@ async function main(pageId) {
         Rating: rating,
         Info: itemStats,
         Stats: stats,
-        RatingImg: ratingImg
+        RatingImg: ratingImg,
+        Count: count
     });
     await browser.close();
     return new Promise(resolve => {
@@ -68,19 +74,10 @@ async function main(pageId) {
 
 async function getTotalComments(url) {
     return new Promise((resolve, reject) => {
-        var options = {
-            url: url,
-            type: "POST",
-            method: "POST",
-            json: true
-        };
-        request(options,
-            (e, r, b) => {
-                if (e) reject(e);
-                resolve(b.total_count);
-            });
+        axios.post(url).then((data) => {
+            resolve(data.data.total_count);
+        }).catch(e => reject(e));
     });
-
 }
 
 module.exports = {

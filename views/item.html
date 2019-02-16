@@ -1,68 +1,48 @@
 ﻿<% include header.html %>
 <link rel="stylesheet" href="../stylesheets/main.css">
-<style>
-    body {
-        background: #272838;
-        color: #989FCE;
-    }
-
-    .desc {
-        background: #5D536B;
-        border-radius: 5px;
-        padding: 20px;
-        line-height: 20px;
-        line-break: auto;
-    }
-
-    img {
-        vertical-align: unset;
-    }
-
-    .pull-right {
-        display: inline-block;
-        float: right;
-        position: relative;
-        top: -10px;
-    }
-
-    .inline {
-        display: inline-block;
-        top: 14px;
-        position: relative;
-    }
-</style>
+<link rel="stylesheet" href="../stylesheets/single.css">
 <br />
 <br />
 <!-- Page Content -->
 <section class="py-5">
     <div class="container">
-        <div>
-            <img src="<%= items.Img %>" class="img-fluid rounded" alt="Preview Image" />
+        <div class="site-wrap">
+            <div class="flag">
+                <h1 class="inline">
+                    <%= items.Title %> By
+                    <%= items.Author %>
+                </h1>
+                <div class="flag__solid-cp soft--right">
+                    <img src="<%= items.Img %>" class="img-fluid rounded" alt="Preview Image" />
+                    <img class="inline" src="<%= items.RatingImg %>" alt="Rating" />
+                    <p>
+                        <%= items.Rating %>
+                    </p>
+                </div>
+                <div class="flag__fluid-cp textbox"></div>
+                <div class="textbox">
+                    <p>File Size:
+                        <%= items.Info[0] %><br />Posted:
+                        <%= items.Info[1] %><br />
+                        <%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %>
+                    </p>
+                    <p>
+                        <%= items.Stats[0] + " Unique Visitors" %><br />
+                        <%= items.Stats[1] + " Current Subscribers" %><br />
+                        <%= items.Stats[2] + " Favourites" %><br />
+                        <%= items.Count + " Total Comments" %>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div>
-            <img class="inline" src="<%= items.RatingImg %>" , alt="Rating" />
-            <p class="inline">
-                <%= items.Rating %>
-            </p>
-            <p>File Size:
-                <%= items.Info[0] %><br />Posted:
-                <%= items.Info[1] %><br />
-                <%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %>
-            </p>
-        </div>
-        <p class="desc">
-            <%= items.Desc %>
-        </p>
-
-
-        <p>
-            <%= items.Stats[0] + " Unique Visitors" %><br />
-            <%= items.Stats[1] + " Current Subscribers" %><br />
-            <%= items.Stats[2] + " Favourites" %>
-        </p>
     </div>
 </section>
-
+<script>
+    $('document').ready(() => {
+        var desc = `<%- items.Desc %>`;
+        document.getElementsByClassName('flag__fluid-cp')[0].innerHTML = desc;
+    });
+</script>
 </body>
 
 </html>

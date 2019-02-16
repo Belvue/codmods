@@ -1,0 +1,57 @@
+body {
+    background: #2d2d2d;
+    color: #F58A07;
+}
+
+.desc {
+    background: #F58A07;
+    border-radius: 5px;
+    padding: 20px;
+    line-height: 20px;
+    line-break: auto;
+}
+
+img {
+    vertical-align: unset;
+}
+
+.inline {
+    display: inline-block;
+    top: 14px;
+    position: relative;
+}
+
+section div {
+    padding: 15px 20px;
+}
+
+section div img {
+    display: block;
+}
+
+body>section>div>div>div>div.flag__solid-cp.soft--right>p {
+    top: 14px;
+    position: relative;
+}
+
+.textbox {
+    background: #fff;
+    opacity: 0.6;
+    border-radius: 5px;
+    margin: 20px 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* HELPER*/
+.soft--right {
+    padding-right: 1rem !important;
+}
+
+/*MISC*/
+img {
+    width: 150px;
+}

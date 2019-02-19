@@ -147,4 +147,12 @@ router.get("/item/:id",
         });
     }
 );
+
+
+router.get('/admin', (req, res) => {
+    res.render('admin/index', {
+        title: 'Admin Panel'
+    });
+});
+
 module.exports = router;

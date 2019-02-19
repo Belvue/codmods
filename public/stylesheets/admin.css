@@ -1,0 +1,163 @@
+body {
+    height: 5%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Top Nav */
+.top-nav {
+    width: 100vw;
+    height: 80px;
+    position: fixed;
+    background: #2D2D2A;
+    z-index: 999;
+}
+
+.top-nav img {
+    position: relative;
+    width: 64px;
+    top: 8px;
+    margin: 0px 68px;
+    display: none;
+}
+
+.top-nav .search {
+    display: inline-block;
+}
+
+.top-nav .search input {
+    top: 20px;
+    position: fixed;
+    border: 1px solid #4C4C47;
+    border-radius: 5px;
+    padding: 10px 20px;
+    left: 60px;
+    transition: left 1.5s;
+}
+
+/* SideNav Bar */
+.nav-list {
+    top: 80px;
+    text-decoration: none;
+    list-style: none;
+    display: inline;
+    position: relative;
+}
+
+.nav {
+    height: 100vh;
+    position: relative;
+    background: #2D2D2A;
+    width: 60px;
+    transition: width 1.5s;
+}
+
+.nav-list>li {
+    padding: 15px 10px;
+}
+
+.nav-list>li>a {
+    text-decoration: none;
+    color: #8B85C1;
+    display: block;
+    padding: 6px 12px;
+    margin: 5px 0;
+    border-radius: 2px;
+    position: relative;
+    float: left;
+    width: 18px;
+    height: 20px;
+    transition: width 1.5s;
+}
+
+.nav-list>li>a>span {
+    padding: 6px 12px;
+    margin: 5px 0;
+    border-radius: 2px;
+    position: relative;
+    opacity: 0;
+}
+
+.nav-list>li>a:hover,
+.nav-list>li>a:focus {
+    color: #7A6F9B;
+    transition: color .5s;
+    background: #4C4C47;
+}
+
+/* Font Icons */
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?jzlbrs');
+    src: url('../fonts/icomoon.eot?jzlbrs#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?jzlbrs') format('truetype'),
+        url('../fonts/icomoon.woff?jzlbrs') format('woff'),
+        url('../fonts/icomoon.svg?jzlbrs#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+    content: "\f015";
+}
+
+.icon-clock-o:before {
+    content: "\f017";
+}
+
+.icon-exclamation-circle:before {
+    content: "\f06a";
+}
+
+.icon-list-ul:before {
+    content: "\f0ca";
+}
+
+.icon-user-times:before {
+    content: "\f235";
+}
+
+/* Media Queries */
+
+@media only screen and (min-width: 1025px) {
+    .nav {
+        width: 200px;
+        transition: width 1.5s;
+    }
+
+    .nav>ul>li>a>span {
+        opacity: 1;
+        transition: opacity 1.5s;
+    }
+
+    .nav>ul>li>a {
+        width: 150px;
+        transition: width .5s;
+    }
+
+    .top-nav img {
+        display: inline-block;
+        transition: display 1.5s;
+    }
+
+    .top-nav .search input {
+        left: 200px;
+    }
+}

@@ -33,15 +33,41 @@
                         <%= items.Count + " Total Comments" %>
                     </p>
                 </div>
+                <div class="textbox" id="comment_section"></div>
             </div>
         </div>
     </div>
 </section>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     $('document').ready(() => {
         var desc = `<%- items.Desc %>`;
         document.getElementsByClassName('flag__fluid-cp')[0].innerHTML = desc;
     });
+    var id = location.href.split('/').pop();
+    var start = 0;
+    var itemCount = 0;
+    var items;
+    var maxlength = 0;
+    grabComments();
+
+    function grabComments() {
+        axios.get(`/api/comments/${id}?start=${start}`).then(res => {
+            itemCount = 0;
+            items = res.data[0];
+            if (start === 0) maxlength = items.total_count;
+            items = items.comments_html;
+        }).catch(err => {
+            console.log(err);
+        }).then(function () {
+            start += 10;
+            document.getElementById('comment_section').innerHTML = items;
+        });
+    }
+
+    function loadmorecomments() {
+        grabComments();
+    };
 </script>
 </body>
 

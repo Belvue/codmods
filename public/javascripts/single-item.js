@@ -52,6 +52,7 @@ async function main(pageId) {
     await getTotalComments(`https://steamcommunity.com/comment/PublishedFile_Public/render/${commentids[0].split('_')[0]}/${commentids[0].split('_').pop()}/`).then(out => {
         count = parseInt(out);
     }).catch(e => console.error(e));
+    console.log(`https://steamcommunity.com/comment/PublishedFile_Public/render/${commentids[0].split('_')[0]}/${commentids[0].split('_').pop()}/`);
     const stats = await page.$$eval(".stats_table tr td:nth-child(odd)", e => e.map((a) => a.innerText));
     console.log(stats);
     output.push({

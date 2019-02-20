@@ -7,6 +7,7 @@ var workshop = require("../public/javascripts/workshop-scraper");
 var lookup = require("../public/javascripts/single-item");
 var top3 = require("../public/javascripts/latest");
 var getImage = require("../public/javascripts/getImage");
+var comments = require("../public/javascripts/comments");
 var async = require('async');
 
 /* GET home page. */
@@ -150,8 +151,18 @@ router.get("/item/:id",
 
 
 router.get('/admin', (req, res) => {
-    res.render('admin/index', {
-        title: 'Admin Panel'
+    res.render('admin/index');
+});
+
+router.get('/signin', (req, res) => {
+    res.render('admin/login');
+});
+
+
+router.get('/api/comments/:id', (req, res) => {
+    const item = req.params.id;
+    comments.main(item, req.query.start).then(items => {
+        res.json(items);
     });
 });
 

@@ -1,0 +1,74 @@
+﻿<% include header.html %>
+<link rel="stylesheet" href="../stylesheets/main.css">
+<link rel="stylesheet" href="../stylesheets/single.css">
+<br />
+<br />
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="site-wrap">
+            <div class="flag">
+                <h1 class="inline">
+                    <%= items.Title %> By
+                    <%= items.Author %>
+                </h1>
+                <div class="flag__solid-cp soft--right">
+                    <img src="<%= items.Img %>" class="img-fluid rounded" alt="Preview Image" />
+                    <img class="inline" src="<%= items.RatingImg %>" alt="Rating" />
+                    <p>
+                        <%= items.Rating %>
+                    </p>
+                </div>
+                <div class="flag__fluid-cp textbox"></div>
+                <div class="textbox">
+                    <p>File Size:
+                        <%= items.Info[0] %><br />Posted:
+                        <%= items.Info[1] %><br />
+                        <%= items.Info[2] != null ? `Updated: ${items.Info[2]}` : "" %>
+                    </p>
+                    <p>
+                        <%= items.Stats[0] + " Unique Visitors" %><br />
+                        <%= items.Stats[1] + " Current Subscribers" %><br />
+                        <%= items.Stats[2] + " Favourites" %><br />
+                        <%= items.Count + " Total Comments" %>
+                    </p>
+                </div>
+                <div class="textbox" id="comment_section"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    $('document').ready(() => {
+        var desc = `<%- items.Desc %>`;
+        document.getElementsByClassName('flag__fluid-cp')[0].innerHTML = desc;
+    });
+    var id = location.href.split('/').pop();
+    var start = 0;
+    var itemCount = 0;
+    var items;
+    var maxlength = 0;
+    grabComments();
+
+    function grabComments() {
+        axios.get(`/api/comments/${id}?start=${start}`).then(res => {
+            itemCount = 0;
+            items = res.data[0];
+            if (start === 0) maxlength = items.total_count;
+            items = items.comments_html;
+        }).catch(err => {
+            console.log(err);
+        }).then(function () {
+            start += 10;
+            document.getElementById('comment_section').innerHTML = items;
+        });
+    }
+
+    function loadmorecomments() {
+        grabComments();
+    };
+</script>
+</body>
+
+</html>
